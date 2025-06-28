@@ -39,12 +39,17 @@ The model formalises the two service-based interfaces proposed in the paper—**
 
 Place MTCP_MEP.tla, MTCP_MEP.cfg and tla2tools.jar in the same directory
 
-Execute
+MacOS Execute:
 ```text
 java -XX:+UseParallelGC -cp tla2tools.jar tlc2.TLC \
      -workers 4 \
      -config MTCP_MEP.cfg MTCP_MEP.tla
 ```
+Windows execute:
+```text
+java -cp tla2tools.jar tlc2.TLC -config MTCP_MEP.cfg MTCP_MEP.tla
+```
+
 
 Expected summary is presented in the image.
 

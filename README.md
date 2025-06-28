@@ -64,6 +64,37 @@ Expected summary is presented in the image.
 | **EventuallyFeedback**  | Liveness  | Every inference triggers feedback eventually.              |
 
 
+✅ Temporal Properties Verified
+This TLA+ specification defines and verifies eight temporal properties using the TLC model checker. These properties fall into two categories: safety (ensuring nothing bad happens) and liveness (ensuring something good eventually happens).
+
+🔒 Safety Properties
+ExactlyOncePublication
+Ensures that a given modelURI is published at most once during the execution lifecycle.
+
+NoStaleLoad
+Guarantees that a model previously tagged as retired cannot be loaded by any Network Function (NF).
+
+DeadlockFreedom
+Ensures that the system never reaches a deadlock; at least one transition is always enabled.
+
+🔁 Liveness Properties
+EventuallyPublished
+Asserts that every MTCP request issued by an NF eventually leads to a published model.
+
+EventuallyFeedback
+Ensures that every MEP inference operation is eventually followed by a metric report (MEP-Report).
+
+🧩 Auxiliary/Structural Properties
+AlwaysEventuallyValidState
+Asserts that the system eventually reaches a stable state that satisfies all defined invariants.
+
+NoDuplicateModelURI
+Ensures that model URIs are unique and cannot be reused in future publications.
+
+ProgressForEachNF
+Verifies that all registered NFs progress through the expected model lifecycle phases (intent → publication → inference).
+
+
 # Scaling the constants
 
 To explore larger scenarios, edit MTCP_MEP.cfg:

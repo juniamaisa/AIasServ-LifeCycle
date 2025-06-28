@@ -1,4 +1,4 @@
-# CNSM 2025: A Protocol-Based Framework for Distributed AI Lifecycle Management in 6G via NWDAF
+# CNSM 2025: A Protocol-Based Framework for AI Lifecycle Management in 6G via NWDAF
 An work about *AIasServ-LifeCycle*
 
 

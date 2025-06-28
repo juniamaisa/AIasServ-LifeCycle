@@ -22,6 +22,7 @@ The model formalises the two service-based interfaces proposed in the paper—**
 └── README.md      # This file
 └── run_output     # Execution evidence
 └── run.tlc.sh     # Execution script. On terminal type: 0bash run_tlc.sh
+└── run.tlc.sh     # Information final output
 
 
 ```

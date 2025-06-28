@@ -20,6 +20,9 @@ The model formalises the two service-based interfaces proposed in the paper—**
 ├── MTCP_MEP.tla   # TLA+ specification: variables, actions, properties
 ├── MTCP_MEP.cfg   # TLC configuration: constants, invariants, liveness goals
 └── README.md      # This file
+└── run_output     # Execution evidence
+└── run.tlc.sh     # Execution script. On terminal type: 0bash run_tlc.sh
+
 
 ```
 ---

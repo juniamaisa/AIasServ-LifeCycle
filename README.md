@@ -21,8 +21,8 @@ The model formalises the two service-based interfaces proposed in the paper—**
 ├── MTCP_MEP.cfg   # TLC configuration: constants, invariants, liveness goals
 └── README.md      # This file
 └── run_output     # Execution evidence
-└── run.tlc.sh     # Execution script. On terminal type: 0bash run_tlc.sh
-└── run.tlc.sh     # Information final output
+└── run_tlc.sh     # Execution script. On terminal type: 0bash run_tlc.sh
+└── run_output.out # Information final output
 
 
 ```

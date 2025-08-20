@@ -108,6 +108,23 @@ CONSTANTS
 
 Section V-A (Formal Verification) of the manuscript cites this artefact.
 
+### Running Example — Messages ↔ TLA+ Variables/States
+
+| Phase | Message(s) | TLA+ Action(s) | Main Variables / State Updates |
+|---|---|---|---|
+| Init (k=0) | — | — | `state_NF = idle`, `state_MLO = idle`, `state_MRV = <>`, `modelURI = ⊥`, `ver = 0`, `kpi = ⊥`, `drift = 0` |
+| 1 | MTCP-Request (NF → MLO) | `MTCP_Request` | `state_NF' = requested`; append intent/SLA to `queue_MLO` |
+| 2 | MTCP-DataCollect (MLO → Data Exposure/NEF) | `MTCP_DataCollect` | `state_MLO' = collecting`; bind `datasetURI` |
+| 3 | MTCP-Train (MLO → Compute) | `MTCP_Train` | `state_MLO' = training`; produce `ckpt` |
+| 4 | MTCP-Validate (MRV) | `MTCP_Validate` | `state_MRV' = valid`; attach validation score + signature |
+| 5 | MTCP-Publish (MRV) | `MTCP_Publish` | Insert `⟨modelURI, ver⟩` into `catalog`; increment `ver`; retire prior version(s) |
+| 6 | MEP-Request (UPF/NF → DEE/MLO) | `MEP_Request` | Cache `modelURI` and execution profile at NF/DEE |
+| 7 | MEP-Load → MEP-Infer (DEE in NF) | `MEP_Load`, `MEP_Infer` | `state_NF' = running`; compute `x̂[k]`; update `kpi` |
+| 8 | MEP-Report (DEE → FA) & feedback | `MEP_Report` (+ policy trigger) | Set `drift'`; if `drift' > θ` then re-enter lifecycle via `MTCP_Request` (i.e., retraining, `ver++`) |
+
+**Minimal TLC configuration used in the artifact:** `N = 3`, `V = 2`.
+
+
 ## TLC verification run summary (reproducibility evidence)
 This table records the outcome of running the public TLA+/TLC artefact that accompanies the manuscript (Sec. V-A: Formal Verification of Lifecycle Protocols).The workflow and terminology follow Lamport’s TLA+/TLC methodology https://www.microsoft.com/en-us/research/wp-content/uploads/2018/05/book-02-08-08.pdf .
 

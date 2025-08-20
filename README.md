@@ -107,8 +107,42 @@ CONSTANTS
 # Relation to the paper
 
 Section V-A (Formal Verification) of the manuscript cites this artefact.
-The TLC statistics (states, depth) match those reported in Table IV of the camera-ready version, confirming reproducibility.
 
+## TLC verification run summary (reproducibility evidence)
+This table records the outcome of running the public TLA+/TLC artefact that accompanies the manuscript (Sec. V-A: Formal Verification of Lifecycle Protocols).The workflow and terminology follow Lamport’s TLA+/TLC methodology.
+
+
+| **Parameter / Result**              | **Value**                                                                        |
+| ----------------------------------- | -------------------------------------------------------------------------------- |
+| TLC constants (from `MTCP_MEP.cfg`) | `NFs = {...}`; `Versions = {...}`; `startModel = ...`                            |
+| States explored (total / distinct)  | **<total> / <distinct>**                                                         |
+| Maximum search depth                | **<depth>**                                                                      |
+| Verified safety properties          | S1: ExactlyOncePublication; S2: NoStaleLoad; S3: DeadlockFreedom                 |
+| Verified liveness properties        | L1: EventuallyPublished; L2: EventuallyFeedback                                  |
+| Auxiliary properties                | NoDuplicateModelURI; ProgressForEachNF; AlwaysEventuallyValidState               |
+| TLC workers / platform              | **\<e.g., 4 workers; macOS/Linux; Java version>**                                |
+| Command line                        | `java -cp tla2tools.jar tlc2.TLC -workers <N> -config MTCP_MEP.cfg MTCP_MEP.tla` |
+
+
+
+## Symbols and EFSM states (reader’s guide to the spec)
+
+This table maps the main variables, states, and actions in your EFSM-style TLA+ model to their informal meaning in the MTCP/MEP protocols described in Sec. III–IV of the manuscript. It is intended to make Sec. V-A easier to read and to align the formal model with the protocol narrative.
+
+| **Name**                        | **Sort / Domain**                               | **Owner / Process** | **Informal meaning and invariants**                                                                                                                                             |
+| ------------------------------- | ----------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `NF`                            | subset of *NFs*                                 | System              | Set of network functions participating in MTCP/MEP (e.g., AMF/SMF/UPF).                                                                                                         |
+| `Versions`                      | finite set                                      | MRV                 | Set of candidate model versions.                                                                                                                                                |
+| `modelURI`                      | `Versions → URI`                                | MRV                 | Immutable locator for each published model version; uniqueness required (S1).                                                                                                   |
+| `state`                         | `Versions → {draft, valid, published, retired}` | MRV                 | Lifecycle state per version; a `retired` model cannot be loaded (S2).                                                                                                           |
+| `registry`                      | finite map                                      | MRV                 | Catalogue of versions with signatures/metadata; holds only `valid` or `published`.                                                                                              |
+| `loaded`                        | `NF → Versions ∪ {⊥}`                           | DEE                 | Currently loaded model per NF (`⊥` if none); must not be `retired` (S2).                                                                                                        |
+| `pendingIntent`                 | subset of `NF`                                  | MLO                 | NFs with open MTCP requests; fairness ensures eventual handling (L1).                                                                                                           |
+| `reportDue`                     | `NF → ℕ`                                        | DEE/FA              | Countdown to enforce bounded report delay; each inference triggers a report within `dmax` (L2).                                                                                 |
+| `dmax`                          | ℕ                                               | System              | Upper bound on inference→report delay (abstract steps).                                                                                                                         |
+| `K`, `a`                        | ℝ                                               | System              | Control-loop gain (`K`) and residual factor (`a`) used in the stability analysis of Sec. V-B.                                                                                   |
+| **Actions (message steps)**     | —                                               | —                   | `MTCP_Request`, `MTCP_DataCollect`, `MTCP_Train`, `MTCP_Validate`, `MTCP_Publish`; `MEP_Request`, `MEP_Load`, `MEP_Infer`, `MEP_Report`. Guards include OAuth 2.0 scope checks. |
+| **Properties (checked by TLC)** | —                                               | —                   | **S1** Exactly-once publication; **S2** No stale load; **S3** Deadlock freedom. **L1** Eventual publication; **L2** Eventual feedback within `dmax`.                            |
 
 
 # Contributions via Issues or Pull Requests are welcome!

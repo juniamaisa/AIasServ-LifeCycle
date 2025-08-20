@@ -109,7 +109,7 @@ CONSTANTS
 Section V-A (Formal Verification) of the manuscript cites this artefact.
 
 ## TLC verification run summary (reproducibility evidence)
-This table records the outcome of running the public TLA+/TLC artefact that accompanies the manuscript (Sec. V-A: Formal Verification of Lifecycle Protocols).The workflow and terminology follow Lamport’s TLA+/TLC methodology.
+This table records the outcome of running the public TLA+/TLC artefact that accompanies the manuscript (Sec. V-A: Formal Verification of Lifecycle Protocols).The workflow and terminology follow Lamport’s TLA+/TLC methodology https://www.microsoft.com/en-us/research/wp-content/uploads/2018/05/book-02-08-08.pdf?utm_source=chatgpt.com.
 
 
 | **Parameter / Result**              | **Value**                                                                        |

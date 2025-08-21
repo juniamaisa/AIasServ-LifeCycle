@@ -6,7 +6,7 @@ An work about *AIasServ-LifeCycle*
 
 This repository contains the **complete, executable TLA+ model** that accompanies the short paper
 
-> **“A Protocol-Based Framework for Distributed AI Lifecycle Management in 6G via NWDAF”**  
+> **“A Protocol-Based Framework for AIaaS Lifecycle Management in 6G via NWDAF”**  
 > (submitted to IEEE CNSM 2025).
 
 The model formalises the two service-based interfaces proposed in the paper—**MTCP** (Model Training & Creation Protocol) and **MEP** (Model Execution Protocol)—and demonstrates, via the **TLC** model checker, that they satisfy the key safety and liveness requirements claimed in the manuscript.
@@ -131,13 +131,13 @@ This table records the outcome of running the public TLA+/TLC artefact that acco
 
 | **Parameter / Result**              | **Value**                                                                        |
 | ----------------------------------- | -------------------------------------------------------------------------------- |
-| TLC constants (from `MTCP_MEP.cfg`) | `NFs = {...}`; `Versions = {...}`; `startModel = ...`                            |
-| States explored (total / distinct)  | **<total> / <distinct>**                                                         |
-| Maximum search depth                | **<depth>**                                                                      |
+| TLC constants (from `MTCP_MEP.cfg`) | `NFs = {3}`; `Versions = {2}`                           |
+| States explored (total / distinct)  | 18,500 / 65 |
+| Maximum search depth                | 11                                                                      |
 | Verified safety properties          | S1: ExactlyOncePublication; S2: NoStaleLoad; S3: DeadlockFreedom                 |
 | Verified liveness properties        | L1: EventuallyPublished; L2: EventuallyFeedback                                  |
 | Auxiliary properties                | NoDuplicateModelURI; ProgressForEachNF; AlwaysEventuallyValidState               |
-| TLC workers / platform              | **\<e.g., 4 workers; macOS/Linux; Java version>**                                |
+| TLC workers / platform              | Java 8 or newer; tla2tools.jar ≥ 2.19                               |
 | Command line                        | `java -cp tla2tools.jar tlc2.TLC -workers <N> -config MTCP_MEP.cfg MTCP_MEP.tla` |
 
 

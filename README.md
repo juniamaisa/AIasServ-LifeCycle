@@ -1,5 +1,5 @@
 # CNSM 2025: A Protocol-Based Framework for AIaaS Lifecycle Management in 6G via NWDAF
-An work about *AIasServ-LifeCycle*
+A work about *AIasServ-LifeCycle*
 
 
 # NWDAF AI-as-a-Service — Formal Specification (TLA+)
@@ -7,7 +7,7 @@ An work about *AIasServ-LifeCycle*
 This repository contains the **complete, executable TLA+ model** that accompanies the short paper
 
 > **“A Protocol-Based Framework for AIaaS Lifecycle Management in 6G via NWDAF”**  
-> (submitted to IEEE CNSM 2025).
+> (Aceptted to IEEE CNSM 2025). https://opendl.ifip-tc6.org/db/conf/cnsm/cnsm2025/1571170270.pdf
 
 The model formalises the two service-based interfaces proposed in the paper—**MTCP** (Model Training & Creation Protocol) and **MEP** (Model Execution Protocol)—and demonstrates, via the **TLC** model checker, that they satisfy the key safety and liveness requirements claimed in the manuscript.
 
@@ -51,7 +51,7 @@ java -cp tla2tools.jar tlc2.TLC -config MTCP_MEP.cfg MTCP_MEP.tla
 ```
 
 
-Expected summary is presented in the image.
+The expected summary is presented in the image.
 
 # Verified properties
 
@@ -173,4 +173,6 @@ timeouts, or authentication scopes as described in the paper.
 
 
 If you use this artefact, please cite our CNSM 2025 short paper:
+Available on: https://opendl.ifip-tc6.org/db/conf/cnsm/cnsm2025/1571170270.pdf
+
 @inproceedings{...}
